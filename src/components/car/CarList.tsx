@@ -1,6 +1,6 @@
 import EmptyItem from '@/components/shared/EmptyItem'
 import { queryClient } from '@/configs/query-client'
-import { deleteCar, fetchCarList, fetchCarListQueryKey } from '@/externals/restapi/car'
+import { deleteCar, fetchCarList, fetchCarListQueryKey, updateCar } from '@/externals/restapi/car'
 import { useQuery, useMutation } from '@tanstack/react-query'
 import { Suspense, lazy } from 'react'
 
@@ -20,8 +20,24 @@ export default function CarList() {
     },
   })
 
+  const { mutateAsync: updateCarMutate } = useMutation({
+    mutationFn: updateCar,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: fetchCarListQueryKey() })
+    },
+  })
+
   const handleEditItem =
-    (id: string) => (values: { name: string; price: number; discount: number }) => {
+    (id: string) => async (values: { name: string; price: number; discount: number }) => {
+      if (!id) return
+      try {
+        await updateCarMutate({
+          id,
+          data: { ...values, price: Number(values.price), discount: Number(values.discount) },
+        })
+      } catch (e) {
+        alert('Failed to update car')
+      }
       console.log('edit', id, values)
     }
 
@@ -30,7 +46,7 @@ export default function CarList() {
     try {
       await deleteCarMutate(id)
     } catch (e) {
-      alert('Delete car failed')
+      alert('Failed to delete car')
     }
   }
 

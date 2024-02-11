@@ -14,7 +14,7 @@ export const deleteCar = async (id: string) => {
   return RestAPI.delete<null>(`/cars/${id}`).then(res => res.data)
 }
 
-export const updateCar = async (id: string, data: Omit<Car, 'id'>) => {
+export const updateCar = async ({ id, data }: { id: string; data: Omit<Car, 'id'> }) => {
   return RestAPI.put<Omit<Car, 'id'>, ResultResponse<Car>>(`/cars/${id}`, data).then(
     res => res.data
   )

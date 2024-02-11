@@ -13,12 +13,17 @@ interface CarItemProps {
   name: string
   price: number
   discount: number
-  onEdit: (values: { name: string; price: number; discount: number }) => void
+  onEdit: (values: { name: string; price: number; discount: number }) => Promise<void>
   onDelete: () => void
 }
 
 export default function CarItem({ name, price, discount, onEdit, onDelete }: CarItemProps) {
   const { isOpen, open, close } = useDisappear()
+
+  const handleSubmit = async (values: { name: string; price: number; discount: number }) => {
+    await onEdit(values)
+    close()
+  }
 
   return (
     <div className='tw-flex tw-rounded-2xl tw-bg-white tw-px-4 tw-py-5 tw-shadow-md'>
@@ -38,7 +43,7 @@ export default function CarItem({ name, price, discount, onEdit, onDelete }: Car
       <div className='tw-flex tw-flex-1 tw-items-center tw-justify-end tw-gap-2'>
         <Formik
           initialValues={{ name, price, discount }}
-          onSubmit={values => onEdit(values)}
+          onSubmit={handleSubmit}
         >
           <Suspense fallback={null}>
             <EditCarDrawer
