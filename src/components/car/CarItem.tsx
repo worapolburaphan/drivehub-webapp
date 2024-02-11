@@ -6,6 +6,7 @@ import { Typography, IconButton } from '@mui/joy'
 import useDisappear from '@/hooks/utils/useDisappear'
 import { Formik } from 'formik'
 import { Suspense, lazy } from 'react'
+import { carFormValidationSchema } from './validationSchema'
 
 const EditCarDrawer = lazy(() => import('./EditCarDrawer'))
 
@@ -43,6 +44,7 @@ export default function CarItem({ name, price, discount, onEdit, onDelete }: Car
       <div className='tw-flex tw-flex-1 tw-items-center tw-justify-end tw-gap-2'>
         <Formik
           initialValues={{ name, price, discount }}
+          validationSchema={carFormValidationSchema}
           onSubmit={handleSubmit}
         >
           <Suspense fallback={null}>

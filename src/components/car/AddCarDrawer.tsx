@@ -5,27 +5,21 @@ import InputField from '@/components/input/InputField'
 import { useMutation } from '@tanstack/react-query'
 import { addCar, fetchCarListQueryKey } from '@/externals/restapi/car'
 import { queryClient } from '@/configs/query-client'
-import * as Yup from 'yup'
 import { DrawerHeader } from '../drawer/DrawerHeader'
+import { carFormValidationSchema } from './validationSchema'
 
 interface AddCarDrawerProps {
   isOpen: boolean
   onClose: () => void
 }
 
-type FormValue = Omit<Car, 'id'>
+export type FormValue = Omit<Car, 'id'>
 
 const initialValues: FormValue = {
   name: '',
   price: 0,
   discount: 0,
 }
-
-const validationSchema: Yup.ObjectSchema<FormValue> = Yup.object().shape({
-  name: Yup.string().required('Name is required'),
-  price: Yup.number().min(0, 'Price must great than 0').required('Price is required'),
-  discount: Yup.number().min(0, 'Discount must great than 0').required('Discount is required'),
-})
 
 export const AddCarDrawer = ({ isOpen, onClose }: AddCarDrawerProps) => {
   const { mutateAsync: addCarMutate } = useMutation({
@@ -59,7 +53,7 @@ export const AddCarDrawer = ({ isOpen, onClose }: AddCarDrawerProps) => {
       />
       <Formik
         initialValues={initialValues}
-        validationSchema={validationSchema}
+        validationSchema={carFormValidationSchema}
         onSubmit={handleAddCar}
       >
         {({ errors, touched }) => (
