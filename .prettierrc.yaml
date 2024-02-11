@@ -9,11 +9,8 @@ singleQuote: true # Enforces the use of single quotes for strings
 trailingComma: "es5" # Adds trailing commas where valid in ES5 (arrays and objects)
 bracketSpacing: true  # Adds spaces inside curly brackets { } and square brackets [ ] 
 arrowParens: "avoid"  # Omits parenthesis around a single argument in arrow functions
+singleAttributePerLine: true
 
 # React-Specific
 jsxSingleQuote: true  # Requires single quotes for JSX attributes
 jsxBracketSameLine: false # Places the > of a multi-line JSX element on its own line 
-
-# Additional Plugin
-plugins:
-  - prettier-plugin-tailwindcss

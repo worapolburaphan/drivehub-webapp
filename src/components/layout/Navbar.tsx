@@ -1,19 +1,14 @@
-import { Navbar as MatNavbar, Typography } from "@material-tailwind/react";
+import { Box } from '@mui/joy'
 
 function Navbar() {
   return (
-    <MatNavbar className="flex items-center gap-2 px-4 h-[60px] py-0 rounded-none shadow-lg shadow-black/10">
-      <img src="/icons/logo.svg" className="w-7" />
-      <Typography
-        as="a"
-        href="#"
-        variant="h6"
-        className="cursor-pointer py-1.5 text-gray-900"
-      >
-        DRIVEHUB
-      </Typography>
-    </MatNavbar>
-  );
+    <Box className='tw-sticky tw-top-0 tw-z-[999] tw-flex tw-h-[60px] tw-items-center tw-gap-2 tw-rounded-none tw-bg-white/80 tw-px-4 tw-py-0 tw-shadow-lg tw-shadow-black/10 tw-backdrop-blur-md'>
+      <img
+        src='/icons/app-logo.svg'
+        className='h-6'
+      />
+    </Box>
+  )
 }
 
-export default Navbar;
+export default Navbar

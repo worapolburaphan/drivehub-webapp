@@ -1,9 +1,8 @@
 import { lazy } from 'react'
 import { RouterProvider, Navigate, createBrowserRouter } from 'react-router-dom'
-import defineRouteTitle from './libs/helpers/page-title'
+import { defineRouteTitle } from './libs/helpers/route-loader'
 import DefaultLayout from './components/layout/DefaultLayout'
-
-const CarList = lazy(() => import('@/pages/car-management/CarList'))
+import CarManagement from './pages/car-management'
 
 const router = createBrowserRouter([
   {
@@ -16,7 +15,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'car-management',
-        element: <CarList />,
+        element: <CarManagement />,
         loader: defineRouteTitle('Car Management'),
       },
     ],
