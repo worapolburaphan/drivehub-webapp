@@ -37,6 +37,7 @@ const EditCarDrawer = ({ isOpen, onClose }: EditCarDrawerProps) => {
           error={touched.name && !!errors.name}
         />
         <Field
+          type='number'
           as={InputField}
           name='price'
           label='Price'
@@ -45,6 +46,7 @@ const EditCarDrawer = ({ isOpen, onClose }: EditCarDrawerProps) => {
           error={touched.price && !!errors.price}
         />
         <Field
+          type='number'
           as={InputField}
           name='discount'
           label='Discount'
